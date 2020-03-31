@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<style>
+    body {
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    h1,h2 {
+        line-height: 20px;
+    }
+    h2{
+        color: gray;
+    }
+    thead td{
+        font-weight: bold;
+        border: 0px;
+        height: 30px;
+        text-align: center;
+    }
+    table {
+        border-spacing: 0px;
+        width: 100%;
+    }
+    tbody td{
+        color: #444444;
+        padding-left: 5px;
+    }
+    tbody tr:nth-child(odd) {
+      background-color: #dddddd;
+    }
+    tbody tr:nth-child(even) {
+      background-color: #f8f8f8;
+    }
+    tbody td:not(:first-child){
+        border-left: 2px solid lightgray;
+        text-align: center;
+    }
+    .table_footer td{
+        background: red;
+        color: white;
+        font-weight: bold;
+    }
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 03</title>
+</head>
+<body>
+    <p>
+        <h1>Coronavírus no Brasil</h1>
+        <h2>Ministério da Saúde confirma 76 casos</h2>
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <td style="width: 40%;"></td>
+                <td style="width: 20%;">Suspeitos</td>
+                <td style="width: 20%;">Confirmados</td>
+                <td style="width: 20%;">Descartados</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Acre (AC)</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Alagoas (AL)</td>
+                <td>6</td>
+                <td>1</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>Amazonas (AM)</td>
+                <td>1</td>
+                <td>0</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>Bahia (BA)</td>
+                <td>65</td>
+                <td>2</td>
+                <td>36</td>
+            </tr>
+            <tr>
+                <td>Ceará (CE)</td>
+                <td>22</td>
+                <td>0</td>
+                <td>42</td>
+            </tr>
+            <tr>
+                <td>Distrito Federal (DF)</td>
+                <td>82</td>
+                <td>2</td>
+                <td>44</td>
+            </tr>
+            <tr>
+                <td>Espírito Santo (ES)</td>
+                <td>51</td>
+                <td>1</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>Goiás (GO)</td>
+                <td>16</td>
+                <td>0</td>
+                <td>33</td>
+            </tr>
+            <tr>
+                <td>Maranhão (MA)</td>
+                <td>6</td>
+                <td>0</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Mato Grosso (MT)</td>
+                <td>6</td>
+                <td>0</td>
+                <td>7</td>
+            </tr>
+            <tr class="table_footer">
+                <td>Brasil</td>
+                <td>258</td>
+                <td>6</td>
+                <td>199</td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="color: darkgray; text-align: right;">
+        <strong style="color: gray;">Fonte:</strong> Ministério da Saúde
+    </p>
+    <p style="color: gray; font-weight: bold; text-align: right">
+        Infográfico elaborado em: 12/03/2020
+    </p>
+</body>
+</html>
