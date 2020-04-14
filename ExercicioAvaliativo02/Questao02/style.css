@@ -1,0 +1,14 @@
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-basis: 5px;
+  justify-content: space-around;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure {
+  border: 4px white solid;
+}

@@ -1,0 +1,14 @@
+section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+h1 {
+  font-size: xx-large;
+}
+
+h2 {
+  font-size: medium;
+}
