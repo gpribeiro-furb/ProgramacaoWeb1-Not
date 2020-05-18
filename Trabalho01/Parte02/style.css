@@ -1,0 +1,36 @@
+body {
+    background-color: #f5f5f5;
+}
+
+.cor-principal {
+    background-color: #039298 !important;
+    color: white !important;
+}
+
+.flex-login {
+    height: 85vh;
+}
+
+.form-login {
+    width: 400px;
+    margin-left: -100px;
+}
+
+.linha {
+    width: 2px;
+    background-color: #aaaaaa;
+    height: 90vh;
+}
+
+label {
+    font-size: 24px;
+}
+
+button {
+    box-shadow: none !important;
+    font-size: 20px !important;
+}
+
+a {
+    color: black !important;
+}
