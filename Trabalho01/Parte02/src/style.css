@@ -7,19 +7,32 @@ body {
     color: white !important;
 }
 
+.cor-principal-escura {
+    background-color: #027f83 !important;
+    color: white !important;
+}
+
 .flex-login {
     height: 85vh;
 }
-
+/* =============== FAZER REMEMBER - ME ============= */
 .form-login {
-    width: 400px;
-    margin-left: -100px;
+    width: 500px;
+    margin-left: 200px;
+}
+
+.logo-nav {
+    max-height: 80px;
 }
 
 .linha {
     width: 2px;
     background-color: #aaaaaa;
     height: 90vh;
+}
+
+.esqueci-senha {
+    color: black !important;
 }
 
 label {
@@ -31,6 +44,3 @@ button {
     font-size: 20px !important;
 }
 
-a {
-    color: black !important;
-}
