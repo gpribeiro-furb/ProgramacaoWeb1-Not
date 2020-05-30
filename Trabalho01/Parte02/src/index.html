@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Store</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"  crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"  crossorigin="anonymous"></script>
     <link rel="icon" href="../resources/logo.png">
     <link rel="stylesheet" href="./style.css"/>
+    <script src="./index.js"></script>
 </head>
 <body>
     <div class="navbar align-content-center cor-principal">
@@ -22,20 +23,69 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark cor-principal-escura">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto" style="text-align: center;">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+                    <a class="nav-link" role="button" id="homem" onclick="obterItens(this)">
+                        Homens
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby=>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="homem-roupa">Roupas</a>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="homem-calcado">Calçados</a>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="homem-acessorio">Acessórios</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" role="button" id="mulher" onclick="obterItens(this)">
+                        Mulheres
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby=>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="mulher-roupa">Roupas</a>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="mulher-calcado">Calçados</a>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="mulher-acessorio">Acessórios</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" role="button" id="roupa" onclick="obterItens(this)">
+                        Roupas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby=>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="roupa-homem">Masculino</a>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="roupa-mulher">Feminino</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" role="button" id="calcado" onclick="obterItens(this)">
+                        Calçados
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby=>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="calcado-homem">Masculino</a>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="calcado-mulher">Feminino</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" role="button" id="acessorio" onclick="obterItens(this)">
+                        Acessórios
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby=>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="acessorio-homem">Masculino</a>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="acessorio-mulher">Feminino</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" role="button" id="equipamento" onclick="obterItens(this)">
+                        Equipamentos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="equipamento-academia">Academia</a>
+                        <a class="dropdown-item" role="button" onclick="obterItens(this)" id="equipamento-lazer">Lazer</a>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
+    <div>
+        <div class="tabela-itens p-4" id="tabela">
+        </div>
+    </div>
 </body>
 </html>
