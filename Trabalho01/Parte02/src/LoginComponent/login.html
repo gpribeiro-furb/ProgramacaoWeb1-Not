@@ -6,7 +6,7 @@
     <title>Health Store</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="icon" href="../../resources/logo.png">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../LoginComponent/login.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="./login.js"></script>
 </head>
@@ -14,7 +14,7 @@
     <nav class="navbar justify-content-center cor-principal">
         <h1>Login</h1>
     </nav>
-    <div class="d-flex p-2 justify-content-center align-items-center flex-login">
+    <div class="d-flex flex-wrap p-2 justify-content-center align-items-center flex-login">
         <div>
             <figure>
                 <img src="../../resources/logo.png"/>
@@ -22,22 +22,32 @@
         </div>
         <form id="formLogin" class="form-login">
             <div class="form-group">
-                <label for="usuario">Usuário</label>
-                <input class="form-control" type="text" id="usuario"/>
+              <label for="usuario">Usuário</label>
+              <input class="form-control" type="text" id="usuario" />
             </div>
             <div class="form-group">
-                <label for="senha">Senha</label>
-                <input type="password" class="form-control" id="senha"/>
+              <label for="senha">Senha</label>
+              <input type="password" class="form-control" id="senha" />
             </div>
+    
+            <div class="form-group form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="lembrar"
+              />
+              <label class="form-check-label" for="lembrar">Lembrar-me</label>
+            </div>
+    
             <div class="py-2 pb-4">
-                <button type="submit" class="btn px-4 cor-principal">Logar</button>
+              <button type="submit" class="btn px-4 cor-principal">Logar</button>
             </div>
             <div id="alert-senha-incorreta" class="alert alert-danger">
-                É necessário informar um usuário e uma senha
+              É necessário informar um usuário e uma senha
             </div>
-
+    
             <a class="esqueci-senha" href="../index.html">Esqueci minha senha</a>
-        </form>
+          </form>
     </div>
 </body>
 </html>

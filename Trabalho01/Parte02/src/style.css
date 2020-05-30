@@ -12,27 +12,8 @@ body {
     color: white !important;
 }
 
-.flex-login {
-    height: 85vh;
-}
-/* =============== FAZER REMEMBER - ME ============= */
-.form-login {
-    width: 500px;
-    margin-left: 200px;
-}
-
 .logo-nav {
     max-height: 80px;
-}
-
-.linha {
-    width: 2px;
-    background-color: #aaaaaa;
-    height: 90vh;
-}
-
-.esqueci-senha {
-    color: black !important;
 }
 
 label {
@@ -74,6 +55,16 @@ button {
     margin-left: auto;
     margin-right: auto;
 }
+
+.filtro{
+    background-color:rgba(0,0,0,0) !important;
+    border:none !important;
+    font-size: 24px;
+    border-bottom: solid 1px rgb(104, 104, 104) !important;
+    max-width: 1260px;
+    margin-left: auto;
+    margin-right: auto;
+ }
 
 @media screen and (max-width: 724px) {
     .imagem-produto {
@@ -137,3 +128,70 @@ figure {
 .link-produto {
     color: black !important;
 }
+
+.footer {
+    background-color: #3b3b3b;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    text-align: center;
+}
+
+.detalhes-compra {
+    padding: 40px;
+}
+
+.dados-compra {
+    padding: 20px;
+}
+
+.figure-compra {
+    width: 400px;
+    height: 400px;
+}
+
+.imagem-compra {
+    width: 100%;
+}
+
+.form-compra {
+    max-width: 700px;
+    margin-top: 20px;
+}
+
+.informacoes-produto {
+    padding-left: 40px;
+    font-size: 24px;
+    width: 400px;
+}
+
+.preco-produto {
+    font-size: 60px;
+}
+
+.custom-control-label {
+    font-size: 20px;
+}
+
+@media screen and (max-width: 1352px) {
+    .dados-compra {
+        padding: 20px;
+        margin-left: 25px;
+        margin-right: 20px;
+    }
+  }
+
+@media screen and (max-width: 912px) {
+    .informacoes-produto {
+        padding-left: 0px;
+        text-align: center;
+    }
+  }

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="icon" href="../../resources/logo.png">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="./compra.js"></script>
+    <script src="../index.js"></script>
+</head>
+<body>
+    <div class="navbar align-content-center cor-principal">
+        <a href="../index.html">
+            <img class="logo-nav" src="../../resources/logo_white.png"/>
+        </a>
+        <div class="d-flex flex-grow-1 justify-content-center">
+            <h1>Tela de Compra</h1>
+        </div>
+    </div>
+    <div class="d-flex flex-wrap p-2">
+        <div class="d-flex flex-wrap flex-grow-2 detalhes-compra justify-content-center">
+            <div>
+                <figure class="figure-compra">
+                    <img id="img-produto" class="imagem-compra"/>
+                </figure>
+            </div>
+            <div class="informacoes-produto">
+                <h1 id="nomeProduto"></h1>
+                <h1 class="preco-produto" id="precoProduto"></h1>
+                <span id="categoriaProduto"></span>
+            </div>
+        </div>
+        <div class="flex-grow-1 dados-compra">
+            <h1>Endereço</h1>
+            <form id="formCompra" class="form-compra">
+                <div class="form-row">
+                    <div class="form-group col-sm-12 pl-0">
+                        <label for="rua">Rua</label>
+                        <input class="form-control" type="text" id="rua"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-lg-8 pl-0">
+                        <label for="cidade">Cidade</label>
+                        <input class="form-control" type="text" id="cidade"/>
+                    </div>
+                    <div class="form-group col-lg-4 pl-0">
+                        <label for="numero">Número</label>
+                        <input class="form-control" type="number" id="numero"/>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-lg-4 pl-0">
+                        <label for="cep">CEP</label>
+                        <input class="form-control" type="text" id="cep"/>
+                    </div>
+                </div>
+
+                <label>Forma de pagamento</label>
+                <div class="custom-radio pl-4">
+                    <input type="radio" class="custom-control-input" id="formaBoleto" name="radio-stacked">
+                    <label class="custom-control-label" for="formaBoleto">Boleto</label>
+                </div>
+                <div class="custom-radio mb-3 pl-4">
+                    <input type="radio" class="custom-control-input" id="formaCartao" name="radio-stacked">
+                    <label class="custom-control-label" for="formaCartao">Cartão de crédito</label>
+                </div>
+
+                <div class="py-2 pb-4">
+                    <button type="submit" class="btn px-4 cor-principal">Finalizar compra</button>
+                </div>
+                <div id="alert-form" class="alert alert-danger">
+                    É necessário completar todos os campos
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <span class="texto-footer">Copyright 2020 ©</span>
+        </div>
+    </footer>
+</body>
+</html>
