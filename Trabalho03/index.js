@@ -43,16 +43,14 @@ $(document).ready(function() {
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function(data) {
+        $("#inputId").val('');
+        $("#form-cadastro").trigger("reset");
+        atualizarTabela();
         Swal.fire(
           "Sucesso!",
           "O empregado foi editado com sucesso",
           "success"
-        ).then(result => {
-          if (result.value) {
-            $("#form-cadastro").trigger("reset");
-            atualizarTabela();
-          }
-        });
+        );
       }
     });
     atualizarTabela();
