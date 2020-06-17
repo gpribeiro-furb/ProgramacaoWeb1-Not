@@ -25,11 +25,14 @@
     <script src="index.js"></script>
   </head>
   <body>
-    <div class="d-flex flex-column justify-content-center align-items-center ">
-      <div class="card-body border border-dark">
+    <div
+      class="d-flex flex-column justify-content-center align-items-center pt-3"
+    >
+      <div class="card-body">
         <h5 class="card-title">Cadastro de Empregados</h5>
         <form id="form-cadastro">
           <div class="form-group">
+            <input type="hidden" id="inputId" />
             <label for="inputNome">Nome</label>
             <input
               type="text"
