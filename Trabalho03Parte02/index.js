@@ -17,13 +17,13 @@ $(document).ready(function() {
 
   function cadastrar(postoNovo) {
     $.ajax({
-      url: "http://rest-api-employees.jmborges.site/api/v1/create",
+      url: "https://private-355956-elitonlunardi.apiary-mock.com/postos",
       type: "POST",
       data: postoNovo,
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function(data) {
-        atualizarTabela();
+        atualizarTabela(data.data);
         Swal.fire(
           "Sucesso!",
           "Cadastro de posto efetuado com sucesso",
@@ -35,9 +35,9 @@ $(document).ready(function() {
     });
   }
 
-  function editar(idAlterar, postoEditado) {
+  function editar(postoEditado) {
     $.ajax({
-      url: `	http://rest-api-employees.jmborges.site/api/v1/update/${idAlterar}`,
+      url: `https://private-355956-elitonlunardi.apiary-mock.com/postos`,
       type: "PUT",
       data: postoEditado,
       contentType: "application/json; charset=utf-8",
@@ -45,7 +45,7 @@ $(document).ready(function() {
       success: function(data) {
         $("#inputId").val('');
         $("#form-cadastro").trigger("reset");
-        atualizarTabela();
+        atualizarTabela(data.data);
         Swal.fire(
           "Sucesso!",
           "O posto foi editado com sucesso",
@@ -53,7 +53,6 @@ $(document).ready(function() {
         );
       }
     });
-    atualizarTabela();
   }
 
   function obterPostoForm() {
@@ -68,22 +67,29 @@ $(document).ready(function() {
   }
 });
 
-function atualizarTabela() {
+function atualizarTabela(postoAdicionado = null) {
   $.ajax({
     type: "GET",
-    url: "https://private-475a25-elitonlunardi.apiary-mock.com/postos",
+    url: "https://private-355956-elitonlunardi.apiary-mock.com/postos",
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function(result) {
+      console.log(postoAdicionado);
+      
       $("table tbody tr").remove();
+      if(postoAdicionado != null){
+        result.push(postoAdicionado);
+      }
       result.forEach(data => {
         $("table tbody").append(`<tr>
         <td>${data.id}</td>
         <td>${data.nome}</td>
         <td>${data.cidade}</td>
         <td>${data.bairro}</td>
-        <button type="button" employeeId="${data.id}" class="btn btn-success" onclick="iniciarEdicao(this)">Editar</button>
-        <button type="button" employeeId="${data.id}" class="btn btn-danger" onclick="excluir(this)">Excluir</button>
+        <td>
+        <button type="button" postoId="${data.id}" class="btn btn-success" onclick="iniciarEdicao(this)">Editar</button>
+        <button type="button" postoId="${data.id}" class="btn btn-danger" onclick="excluir(this)">Excluir</button>
+        <button type="button" postoId="${data.id}" class="btn btn-info" onclick="buscarCombustiveis(this)">Lista de Combustível</button>
         </td>
         </tr>`);
       });
@@ -92,16 +98,16 @@ function atualizarTabela() {
 }
 
 function iniciarEdicao(btn) {
-  var employeeId = $(btn).attr("employeeId");
+  var postoId = $(btn).attr("postoId");
   $.ajax({
     type: "GET",
-    url: `http://rest-api-employees.jmborges.site/api/v1/employee/${employeeId}`,
+    url: `https://private-355956-elitonlunardi.apiary-mock.com/posto/11`,
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function(result) {
-      var posto = result.data;
+      var posto = result;
         $("#inputId").val(posto.id),
-        $("#inputNome").val(posto.name),
+        $("#inputNome").val(posto.nome),
         $("#inputCidade").val(posto.cidade),
         $("#inputBairro").val(posto.bairro);
     }
@@ -110,10 +116,10 @@ function iniciarEdicao(btn) {
 
 function excluir(btn) {
   $("#form-cadastro").trigger("reset");
-  var employeeId = $(btn).attr("employeeId");
+  var postoId = $(btn).attr("postoId");
   $.ajax({
     type: "DELETE",
-    url: `http://rest-api-employees.jmborges.site/api/v1/delete/${employeeId}`,
+    url: `https://private-355956-elitonlunardi.apiary-mock.com/posto/11`,
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function(result) {
@@ -133,4 +139,9 @@ function excluir(btn) {
       });
     }
   });
+}
+
+function buscarCombustiveis(btn) {
+  var postoId = $(btn).attr("postoId");
+  location.href = "./CombustivelComponent/combustivel.component.html";
 }
