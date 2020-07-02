@@ -58,10 +58,9 @@ $(document).ready(function() {
   function obterPostoForm() {
     var posto = JSON.stringify({
       id: $("#inputId").val(),
-      name: $("#inputNome").val(),
+      nome: $("#inputNome").val(),
       cidade: $("#inputCidade").val(),
-      bairro: $("#inputIdade").val(),
-      profile_imbairro: $("#inputAvatar").val()
+      bairro: $("#inputBairro").val()
     });
     return posto;
   }
