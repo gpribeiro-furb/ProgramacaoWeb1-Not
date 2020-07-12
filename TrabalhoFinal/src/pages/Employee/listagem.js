@@ -11,7 +11,16 @@ export default class Listar extends Component {
       employees: [],
       acessandoApi: true,
       novoEmpregado: null,
+
       mostrarModalEdicao: false,
+      idEmployeeAlteracao: 0,
+      employeeAlteracao: {
+        id: "",
+        employee_name: "",
+        employee_salary: 0,
+        employee_age: 0,
+        profile_image: null,
+      },
     };
   }
 
@@ -48,15 +57,30 @@ export default class Listar extends Component {
   };
 
   handleClickEditar = (event) => {
-    var idEmployeeEditar = event.target.getAttribute("employee-id");
-    this.setState({ mostrarModalEdicao: true });
+    var idEmployeeAlteracao = event.target.getAttribute("employee-id");
+    this.setState({
+      mostrarModalEdicao: true,
+      idEmployeeAlteracao: idEmployeeAlteracao,
+    });
+    api.get(`employee/${idEmployeeAlteracao}`).then((response) => {
+      console.log(response.data.data);
+      this.setState({
+        employeeAlteracao: response.data.data,
+      });
+    });
   };
 
   handleCloseModalEditar = (event) =>
     this.setState({ mostrarModalEdicao: false });
 
   render() {
-    const { acessandoApi, employees, mostrarModalEdicao } = this.state;
+    const {
+      acessandoApi,
+      employees,
+      mostrarModalEdicao,
+      employeeAlteracao,
+    } = this.state;
+
     if (acessandoApi) {
       return <h1>Carregando...</h1>;
     } else {
@@ -113,6 +137,8 @@ export default class Listar extends Component {
               <Modal.Title>Modal heading</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+              {employeeAlteracao.id}
+              {employeeAlteracao.employee_name}
               Woohoo, you're reading this text in a modal!
             </Modal.Body>
             <Modal.Footer>
