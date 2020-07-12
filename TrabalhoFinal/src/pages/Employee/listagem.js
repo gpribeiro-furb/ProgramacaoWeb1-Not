@@ -1,33 +1,67 @@
 import React, { Component } from "react";
-import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import api from "../../services/api";
+import Swal from "sweetalert2";
+
 export default class Listar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       employees: [],
       acessandoApi: true,
-      novoEmpregado: null
+      novoEmpregado: null,
+      mostrarModalEdicao: false,
     };
   }
 
   async componentDidMount() {
     const response = await api.get("employees");
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       acessandoApi: false,
-      employees: response.data.data
+      employees: response.data.data,
+      mostrarModalEdicao: false,
+      nome: "",
     }));
   }
 
+  handleClickExcluir = (event) => {
+    var idEmployeeRemover = event.target.getAttribute("employee-id");
+    Swal.fire({
+      title: "Você tem certeza que deseja excluir o empregado?",
+      text: "Não será possível reverter esta ação!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, desejo remover!",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.value) {
+        api.delete(`delete/${idEmployeeRemover}`).then((response) => {
+          Swal.fire("Sucesso!", "Empregado removido com sucesso.", "success");
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire("Operação cancelada.", "", "info");
+      }
+    });
+  };
+
+  handleClickEditar = (event) => {
+    var idEmployeeEditar = event.target.getAttribute("employee-id");
+    this.setState({ mostrarModalEdicao: true });
+  };
+
+  handleCloseModalEditar = (event) =>
+    this.setState({ mostrarModalEdicao: false });
+
   render() {
-    const { acessandoApi, employees } = this.state;
+    const { acessandoApi, employees, mostrarModalEdicao } = this.state;
     if (acessandoApi) {
       return <h1>Carregando...</h1>;
     } else {
       return (
         <>
-          {/* id, employee_name, employee_salary, employee_age, profile_image */}
           <table className="table table-sm mt-5">
             <thead>
               <tr>
@@ -40,7 +74,7 @@ export default class Listar extends Component {
               </tr>
             </thead>
             <tbody>
-              {employees.map(empl => (
+              {employees.map((empl) => (
                 <tr key={empl.id}>
                   <td>{empl.id}</td>
                   <td>{empl.employee_name}</td>
@@ -48,7 +82,13 @@ export default class Listar extends Component {
                   <td>{empl.employee_age}</td>
                   <td>{empl.profile_image}</td>
                   <td>
-                    <Button type="button" variant="warning" size="sm">
+                    <Button
+                      type="button"
+                      variant="warning"
+                      size="sm"
+                      employee-id={empl.id}
+                      onClick={this.handleClickEditar}
+                    >
                       Editar
                     </Button>
 
@@ -57,6 +97,8 @@ export default class Listar extends Component {
                       type="button"
                       variant="danger"
                       size="sm"
+                      employee-id={empl.id}
+                      onClick={this.handleClickExcluir}
                     >
                       Excluir
                     </Button>
@@ -65,6 +107,20 @@ export default class Listar extends Component {
               ))}
             </tbody>
           </table>
+
+          <Modal show={mostrarModalEdicao}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Woohoo, you're reading this text in a modal!
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={this.handleCloseModalEditar}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </>
       );
     }

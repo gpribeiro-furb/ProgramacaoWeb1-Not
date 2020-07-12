@@ -14,27 +14,26 @@ export default class Employee extends Component {
       name: "",
       salary: "",
       age: "",
-      avatar: ""
+      avatar: "",
     };
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     let nam = event.target.name;
     let val = event.target.value;
     this.setState({ [nam]: val });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     let data = JSON.stringify(this.state);
 
     api
       .post("create", data)
-      .then(response => {
-        console.log(response);
+      .then((response) => {
         Swal.fire("Sucesso!", "Empregado cadastrado com sucesso!", "success");
       })
-      .catch(error => {
+      .catch((error) => {
         Swal.fire("Ooops :(", `${error}`, "error");
       });
   };
