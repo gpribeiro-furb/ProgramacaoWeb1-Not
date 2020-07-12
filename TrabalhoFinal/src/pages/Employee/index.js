@@ -40,14 +40,20 @@ export default class Employee extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     let data = JSON.stringify(this.state);
-
     api
       .post("create", data)
       .then((response) => {
-        console.log(response.data.data);
         if (response.status == 200) {
+          var novoEmpregadoRetornadoApi = response.data.data;
+          var novoEmpregado = {
+            id: novoEmpregadoRetornadoApi.id,
+            employee_name: novoEmpregadoRetornadoApi.name,
+            employee_salary: novoEmpregadoRetornadoApi.salary,
+            employee_age: novoEmpregadoRetornadoApi.age,
+            profile_image: novoEmpregadoRetornadoApi.profile_image,
+          };
           this.setState({
-            employees: this.state.employees.concat(response.data.data),
+            employees: this.state.employees.concat(novoEmpregado),
           });
           Swal.fire("Sucesso!", "Empregado cadastrado com sucesso!", "success");
         }
