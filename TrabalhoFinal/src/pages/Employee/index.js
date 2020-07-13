@@ -17,17 +17,15 @@ export default class Employee extends Component {
       avatar: "",
 
       employees: [],
-
       acessandoApi: true,
       mostrarModalEdicao: false,
-      idEmployeeAlteracao: 0,
-      employeeAlteracao: {
-        id: "",
-        employee_name: "",
-        employee_salary: 0,
-        employee_age: 0,
-        profile_image: null,
-      },
+      // employeeAlteracao: {
+      id: "",
+      employee_name: "",
+      employee_salary: 0,
+      employee_age: 0,
+      profile_image: "",
+      // },
     };
   }
 
@@ -61,6 +59,21 @@ export default class Employee extends Component {
       .catch((error) => {
         Swal.fire("Ooops :(", `${error}`, "error");
       });
+  };
+
+  handleSubmitAlteracao = (event) => {
+    event.preventDefault();
+    var employeeEditar = {
+      id: this.state.id,
+      name: this.state.employee_name,
+      salary: this.state.employee_salary,
+      age: this.state.employee_age,
+      profile_image: this.state.profile_image,
+    };
+    console.log(employeeEditar);
+    api.put(`update/${employeeEditar.id}`, employeeEditar).then((response) => {
+      console.log(response);
+    });
   };
 
   async componentDidMount() {
@@ -102,9 +115,12 @@ export default class Employee extends Component {
       idEmployeeAlteracao: idEmployeeAlteracao,
     });
     api.get(`employee/${idEmployeeAlteracao}`).then((response) => {
-      console.log(response.data.data);
       this.setState({
-        employeeAlteracao: response.data.data,
+        id: response.data.data.id,
+        employee_name: response.data.data.employee_name,
+        employee_salary: response.data.data.employee_salary,
+        employee_age: response.data.data.employee_age,
+        profile_image: response.data.data.profile_image,
       });
     });
   };
@@ -117,9 +133,13 @@ export default class Employee extends Component {
       acessandoApi,
       employees,
       mostrarModalEdicao,
-      employeeAlteracao,
+      //alteracao employee abaixo
+      id,
+      employee_name,
+      employee_salary,
+      employee_age,
+      profile_image,
     } = this.state;
-    console.log(employees);
     if (acessandoApi) {
       return <h1>Carregando...</h1>;
     } else {
@@ -234,18 +254,69 @@ export default class Employee extends Component {
               ))}
             </tbody>
           </table>
-          <Modal show={mostrarModalEdicao}>
+          <Modal show={mostrarModalEdicao} onHide={this.handleCloseModalEditar}>
             <Modal.Header closeButton>
               <Modal.Title>Modal heading</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              {employeeAlteracao.id}
-              {employeeAlteracao.employee_name}
-              Woohoo, you're reading this text in a modal!
+              <Form onSubmit={this.handleSubmitAlteracao}>
+                <Form.Group>
+                  <Form.Label>Nome</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="employee_name"
+                    placeholder="Nome"
+                    onChange={this.handleChange}
+                    value={this.state.employee_name}
+                  />
+                </Form.Group>
+
+                <Form.Row>
+                  <Form.Group as={Col}>
+                    <Form.Label>Salário</Form.Label>
+                    <Form.Control
+                      type="number"
+                      min="1"
+                      step="any"
+                      name="employee_salary"
+                      placeholder="Salário"
+                      onChange={this.handleChange}
+                      value={this.state.employee_salary}
+                    />
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Label>Idade</Form.Label>
+                    <Form.Control
+                      type="number"
+                      min="1"
+                      step="any"
+                      placeholder="Idade"
+                      name="employee_age"
+                      onChange={this.handleChange}
+                      value={this.state.employee_age}
+                    />
+                  </Form.Group>
+                </Form.Row>
+
+                <Form.Group>
+                  <Form.Label>Avatar</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Avatar"
+                    name="profile_image"
+                    onChange={this.handleChange}
+                    value={this.state.profile_image}
+                  />
+                </Form.Group>
+
+                <Button type="submit" variant="primary">
+                  Salvar
+                </Button>
+              </Form>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleCloseModalEditar}>
-                Close
+                Fechar
               </Button>
             </Modal.Footer>
           </Modal>
