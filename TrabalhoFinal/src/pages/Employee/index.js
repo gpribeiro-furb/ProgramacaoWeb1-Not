@@ -100,6 +100,12 @@ export default class Employee extends Component {
     }).then((result) => {
       if (result.value) {
         api.delete(`delete/${idEmployeeRemover}`).then((response) => {
+          this.setState({
+            employees: this.state.employees.filter(function (employee) {
+              return employee.id !== idEmployeeRemover;
+            }),
+          });
+
           Swal.fire("Sucesso!", "Empregado removido com sucesso.", "success");
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
