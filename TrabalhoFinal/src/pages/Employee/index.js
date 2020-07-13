@@ -52,7 +52,12 @@ export default class Employee extends Component {
           };
           this.setState({
             employees: this.state.employees.concat(novoEmpregado),
+            name: "",
+            salary: "",
+            age: "",
+            avatar: "",
           });
+
           Swal.fire("Sucesso!", "Empregado cadastrado com sucesso!", "success");
         }
       })
