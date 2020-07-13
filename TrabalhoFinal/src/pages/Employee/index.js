@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import api from "../../services/api";
@@ -14,7 +15,7 @@ export default class Employee extends Component {
       name: "",
       salary: "",
       age: "",
-      avatar: "",
+      profile_image: "",
 
       employees: [],
       acessandoApi: true,
@@ -37,7 +38,13 @@ export default class Employee extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    let data = JSON.stringify(this.state);
+    var data = {
+      id: this.state.id,
+      name: this.state.name,
+      salary: this.state.salary,
+      age: this.state.age,
+      profile_image: this.state.avatar,
+    };
     api
       .post("create", data)
       .then((response) => {
@@ -75,9 +82,22 @@ export default class Employee extends Component {
       age: this.state.employee_age,
       profile_image: this.state.profile_image,
     };
-    console.log(employeeEditar);
     api.put(`update/${employeeEditar.id}`, employeeEditar).then((response) => {
-      console.log(response);
+      if(response.status == 200){
+        var novoEmpregadoRetornadoApi = response.data.data;
+        var employeesAtuais = this.state.employees;
+        var novoEmpregado = {
+          id: novoEmpregadoRetornadoApi.id,
+          employee_name: novoEmpregadoRetornadoApi.name,
+          employee_salary: novoEmpregadoRetornadoApi.salary,
+          employee_age: novoEmpregadoRetornadoApi.age,
+          profile_image: novoEmpregadoRetornadoApi.profile_image,
+        };
+        employeesAtuais[employeesAtuais.indexOf(employeesAtuais.find((v) => v.id == employeeEditar.id))] = novoEmpregado;
+
+        this.setState({ mostrarModalEdicao: false });
+      }
+
     });
   };
 
@@ -128,10 +148,10 @@ export default class Employee extends Component {
     api.get(`employee/${idEmployeeAlteracao}`).then((response) => {
       this.setState({
         id: response.data.data.id,
-        employee_name: response.data.data.employee_name,
-        employee_salary: response.data.data.employee_salary,
-        employee_age: response.data.data.employee_age,
-        profile_image: response.data.data.profile_image,
+        employee_name: response.data.data.employee_name || '',
+        employee_salary: response.data.data.employee_salary || 0,
+        employee_age: response.data.data.employee_age || 0,
+        profile_image: response.data.data.profile_image || '',
       });
     });
   };
@@ -220,7 +240,7 @@ export default class Employee extends Component {
               </Button>
             </Form>
           </Container>
-          <table className="table table-sm mt-5">
+          <Table striped bordered hover size="sm" responsive className="mt-5">
             <thead>
               <tr>
                 <th scope="col">Id</th>
@@ -238,7 +258,7 @@ export default class Employee extends Component {
                   <td>{empl.employee_name}</td>
                   <td>{empl.employee_salary}</td>
                   <td>{empl.employee_age}</td>
-                  <td>{empl.profile_image}</td>
+                  <td>{empl.profile_image.length > 100 ? empl.profile_image.substring(0,100)+"..." : empl.profile_image}</td>
                   <td>
                     <Button
                       type="button"
@@ -264,10 +284,10 @@ export default class Employee extends Component {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </Table>
           <Modal show={mostrarModalEdicao} onHide={this.handleCloseModalEditar}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>Alteração</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form onSubmit={this.handleSubmitAlteracao}>
@@ -287,7 +307,6 @@ export default class Employee extends Component {
                     <Form.Label>Salário</Form.Label>
                     <Form.Control
                       type="number"
-                      min="1"
                       step="any"
                       name="employee_salary"
                       placeholder="Salário"
@@ -299,7 +318,6 @@ export default class Employee extends Component {
                     <Form.Label>Idade</Form.Label>
                     <Form.Control
                       type="number"
-                      min="1"
                       step="any"
                       placeholder="Idade"
                       name="employee_age"
@@ -319,17 +337,14 @@ export default class Employee extends Component {
                     value={this.state.profile_image}
                   />
                 </Form.Group>
-
-                <Button type="submit" variant="primary">
+                <Button variant="secondary" onClick={this.handleCloseModalEditar}>
+                  Fechar
+                </Button>
+                <Button className="ml-1" type="submit" variant="primary">
                   Salvar
                 </Button>
               </Form>
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleCloseModalEditar}>
-                Fechar
-              </Button>
-            </Modal.Footer>
           </Modal>
         </>
       );
